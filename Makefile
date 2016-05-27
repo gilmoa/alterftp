@@ -13,5 +13,16 @@ install : alterftp
 clean :
 	@rm -f *~ alterftp
 
-test : alterftp
-	./$^
+test1 : alterftp
+	./$^ help
+
+test2 : alterftp
+	./$^ init file1 file2
+
+test3 : alterftp
+	./$^ send
+
+test4 : alterftp
+	./$^ send file1 file2 file3
+
+test : test1 test2 test3 test4
