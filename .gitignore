@@ -3,3 +3,6 @@ doc/
 *~
 *.swp
 .DS_Store
+
+# ignore build file
+alterftp
