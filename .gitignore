@@ -6,3 +6,7 @@ doc/
 
 # ignore build file
 alterftp
+
+#ignore testing file
+testing/
+found_correct.txt

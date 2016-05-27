@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -Wall
 
-alterftp : alterftp.c
-	$(CC) $^ -o $@ $(CFLAGS)
+alterftp : alterftp.c debug.c
+	$(CC) $< -o $@ $(CFLAGS)
 
 install : alterftp
 	cp $^ /usr/bin/$^
