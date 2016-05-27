@@ -1,0 +1,5 @@
+# Misc stuffs
+doc/
+*~
+*.swp
+.DS_Store
