@@ -24,7 +24,7 @@ int print_debug(const char *format, ...)
 
 void print_string(char *text, char *var)
 {
-	print_debug("%-20s: %15p => '%s' (char *)\n", text, &var, var);
+	print_debug("%-20s: %15p => '%s' (char *)\n", text, &(var[0]), var);
 }
 
 void print_int(char *text, int *var)

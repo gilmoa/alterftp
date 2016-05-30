@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall
 
-alterftp : alterftp.c debug.c
+alterftp : alterftp.c config_file.c debug.c
 	$(CC) $< -o $@ $(CFLAGS)
 
 install : alterftp

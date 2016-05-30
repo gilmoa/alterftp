@@ -4,8 +4,9 @@ doc/
 *.swp
 .DS_Store
 
-# ignore build file
+# ignore build/run file
 alterftp
+.alterftp_conf
 
 #ignore testing file
 testing/
