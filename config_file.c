@@ -2,7 +2,7 @@ struct creds
 {
 	char user[32];
 	char pwd[32];
-	char address[64];
+	char dir[32];
 	unsigned int sumcheck;
 };
 
@@ -15,8 +15,7 @@ unsigned int sum(struct creds *c)
 	{
 		r += c->user[x];
 		r += c->pwd[x];
-		r += c->address[x * 2];
-		r += c->address[x * 2 + 1];
+		r += c->dir[x];
 	}
 
 	return r;

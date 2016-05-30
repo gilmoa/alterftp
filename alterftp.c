@@ -42,7 +42,11 @@ int main(int argc, char *argv[]) {
 
 	int x;
 	for(x = 2; x < argc; x++)
-		targets[x - 2] = argv[x];
+	{
+		targets[x - 2] = malloc((strlen(argv[x]) + 2) * sizeof(char));
+		strcpy(targets[x - 2], "/");
+		strcat(targets[x - 2], argv[x]);
+	}
 
 	for(x = 0; x < targets_count; x++)
 	{
@@ -57,8 +61,9 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
-	printf("ftp://%s:%s@%s\n", credentials.user, credentials.pwd, credentials.address);
+	printf("ftp://%s:%s@ftp.%s.altervista.org/%s\n", credentials.user, credentials.pwd, credentials.user, credentials.dir);
 
+	free(targets);
 	exit(EXIT_SUCCESS);
 }
 
@@ -95,8 +100,13 @@ void do_init()
 	printf("%10s: ", "password");
 	scanf("%s", credentials.pwd);
 
-	printf("%10s: ", "ftp address");
-	scanf("%s", credentials.address);
+	printf("%10s: ", "directory");
+	scanf("%s", credentials.dir);
+
+	if(credentials.dir[strlen(credentials.dir) - 1] == '/')
+	{
+		credentials.dir[strlen(credentials.dir) - 1] = '\0';
+	}
 
 	if(!save_credentials(CONF_PATH, credentials))
 		exit(EXIT_FAILURE);
