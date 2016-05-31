@@ -16,6 +16,7 @@ void do_init();
 int curl_mkdir(char *base_path, char *path);
 int curl_rmdir(char *base_path, char *path);
 int curl_send(char *base_path, char *path, char *target);
+int curl_delete(char *base_path, char *path);
 
 int main(int argc, char *argv[]) {
 	// checks arguments sanity
@@ -46,6 +47,7 @@ int main(int argc, char *argv[]) {
 	struct creds credentials;
 	if(!get_credentials(CONF_PATH, &credentials))
 	{
+		printf("ERROR parsing credentials, please run <init>.\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -60,10 +62,6 @@ int main(int argc, char *argv[]) {
 		strcat(targets[x - 2], "/");
 		strcat(targets[x - 2], argv[x]);
 	}
-
-	// Debug arguments
-	for(x = 0; x < targets_count; x++)
-		print_string("target", targets[x]);
 
 	// Compute base path url
 	char base_path_adds[] = "ftp://:@ftp..altervista.org";
@@ -89,7 +87,7 @@ int main(int argc, char *argv[]) {
 		}
 
 		while(wait(NULL) > 0);
-		print_done();
+		printf("\033[1;32mDONE.\033[0m\n");
 	}
 	// RMDIR
 	else if(strcmp(cmd, "rmdir") == 0)
@@ -104,7 +102,7 @@ int main(int argc, char *argv[]) {
 		}
 
 		while(wait(NULL) > 0);
-		print_done();
+		printf("\033[1;32mDONE.\033[0m\n");
 	}
 	// SEND
 	else if(strcmp(cmd, "send") == 0)
@@ -123,7 +121,7 @@ int main(int argc, char *argv[]) {
 		}
 
 		while(wait(NULL) > 0);
-		print_done();
+		printf("\033[1;32mDONE.\033[0m\n");
 	}
 	// DELETE
 	else if(strcmp(cmd, "delete") == 0)
@@ -139,7 +137,7 @@ int main(int argc, char *argv[]) {
 		}
 
 		while(wait(NULL) > 0);
-		print_done();
+		printf("\033[1;32mDONE.\033[0m\n");
 	}
 	else
 	{
@@ -275,7 +273,6 @@ int curl_delete(char *base_path, char *path)
 	strcpy(base_path_c, base_path);
 	strcat(base_path_c, "/");
 
-	print_debug("%s %s %s\n", base_path_c, "-Q", target);
 	r = curl_cmd(base_path_c, "-Q", target);
 	free(target);
 	return r;
