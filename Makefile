@@ -23,6 +23,19 @@ test3 : alterftp
 	./$^ send
 
 test4 : alterftp
-	./$^ send file1 file2 file3
+	./$^ mkdir file1 file2 file3
 
-test : test1 test2 test3 test4
+test5 : alterftp
+	./$^ rmdir file1 file2 file3
+
+%.txt :
+	@touch $@
+
+test6 : alterftp file1.txt file2.txt
+	./$< send file1.txt file2.txt testing/test.txt
+	@rm -f *.txt
+
+test7 : alterftp
+	./$< delete file1.txt file2.txt testing/test.txt
+
+test : test1 test3 test4 test5 test6

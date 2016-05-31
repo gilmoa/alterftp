@@ -31,3 +31,8 @@ void print_int(char *text, int *var)
 {
 	print_debug("%-20s: %15p => '%i' (int)\n", text, var, *var);
 }
+
+void print_done()
+{
+	print_debug("DONE.\n");
+}
